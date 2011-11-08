@@ -92,6 +92,7 @@ function redirect_schema() {
     'primary key' => array('rid'),
     'unique keys' => array(
       'hash' => array('hash'),
+      'source_language' => array('source', 'language'),
     ),
     'indexes' => array(
       'expires' => array('type', 'access'),
@@ -179,4 +180,11 @@ function redirect_update_5() {
     ));
     db_add_index('redirect', 'expires', array('type', 'access'));
   }
+}
+
+/**
+ * Add missing "source_language" index.
+ */
+function redirect_update_6() {
+  db_add_unique_key('redirect', 'source_language', array('source', 'language'));
 }
